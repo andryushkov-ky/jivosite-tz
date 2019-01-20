@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=1">
+  <title>Jivosite-TZ</title>
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+</head>
+<body>
+  <div class="content">
+    <aside class="content__aside">
+      <div class="logo">
+        <div class="logo__inner">
+          <div class="logo__img"></div>
+          <span class="logo__desc">for developers</span>
+        </div>
+
+        <div class="burger-btn">
+          <input type="checkbox" class="burger-btn__open" name="burger-btn__open" id="burger-btn"/>
+          <label class="burger-btn__open-button" for="burger-btn">
+            <span class="burger-btn__hamburger burger-btn__hamburger--1"></span>
+            <span class="burger-btn__hamburger burger-btn__hamburger--2"></span>
+            <span class="burger-btn__hamburger burger-btn__hamburger--3"></span>
+          </label>
+        </div>
+      </div>
+      <div class="content__menu-wrap">
+        <div class="menu">
+          <ul class="menu__list">
+            <li class="menu__item">
+              <a href="#javascript-api" class="menu__item-title menu__item-title--big">JavaScript API</a>
+              <ul class="menu__inner-list">
+                <li class="menu__inner-item">
+                  <a href="#methods-and-voids" class="menu__item-title menu__item-title--small">Methods and voids</a>
+                </li>
+                <li class="menu__inner-item">
+                  <a href="#chat-mode" class="menu__item-title menu__item-title--small">chatMode</a>
+                </li>
+                <li class="menu__inner-item">
+                  <a href="#get-contact-info" class="menu__item-title menu__item-title--small">getContactInfo</a>
+                </li>
+                <li class="menu__inner-item">
+                  <a href="#get-visitor-number" class="menu__item-title menu__item-title--small">getVisitorNumber</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu__item">
+            <a href="#webhooks" class="menu__item-title menu__item-title--big">Webhooks</a>
+            <ul class="menu__inner-list">
+              <li class="menu__inner-item">
+                <a href="#events" class="menu__item-title menu__item-title--small">Events</a>
+              </li>
+              <li class="menu__inner-item">
+                <a href="#chat-accepted" class="menu__item-title menu__item-title--small">chat_accepted</a>
+              </li>
+              <li class="menu__inner-item">
+                <a href="#chat-finished" class="menu__item-title menu__item-title--small">chat_finished</a>
+              </li>
+              <li class="menu__inner-item">
+                <a href="#offline-message" class="menu__item-title menu__item-title--small">offline_message</a>
+              </li>
+            </ul>
+          </li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+    <main class="content__rest">
+      <div class="box">
+        <div class="box__text">
+          <h1 class="box__title box__title--h1">JivoSite API для разработчиков</h1>
+          <p class="box__paragraph">JivoSite предоставляет разработчикам два набора инструментов для интеграции:</p>
+          <p class="box__paragraph">
+            <span class="box__text-bold">Клиентская часть — Javascript API виджета</span>,
+            позволяющее управлять виджетом, который отображается пользователю.
+            С помощью него можно управлять окном чата, а так же передавать
+            произвольную информацию со страницы, на которой размещено окно
+            чата, в приложение оператора (например, можно передать
+            дополнительную информацию о пользователе, которая так же
+            будет сохранена в журнале диалогов).
+          </p>
+          <p class="box__paragraph">
+            <span class="box__text-bold">Серверная часть — Webhooks API</span>,
+            позволяющее получать уведомления о
+            начале или завершении чата на стороне
+            вашего сервера, а так же передавать в JivoSite
+            дополнительную информацию для отображения в приложени
+            оператора в ответе на HTTP-запросы.
+          </p>
+        </div>
+        <div class="box__code"></div>
+      </div>
+      <div class="box" id="javascript-api">
+        <div class="box__text">
+          <h2 class="box__title box__title--h2">JavaScript API</h2>
+        </div>
+        <div class="box__code"></div>
+      </div>
+      <div class="box" id="methods-and-voids">
+        <div class="box__text">
+          <h3 class="box__title box__title--h3">Methods and voids</h3>
+          <p class="box__paragraph">
+            JivoSite вызывает перечисленные ниже функции на странице,
+            чтобы сообщить о возникновении события. Вы можете объявить
+            на странице любую из этих функций и выполнять в ней логику
+            обработки возникшего события. Например, по событию
+            jivo_onIntroduction вы можете получить введенные
+            клиентом контактные данные.
+          </p>
+          <h4 class="box__title box__title--h4">
+            Callback-функции
+          </h4>
+          <div class="table">
+            <div class="table__row table__row--head">
+              <div class="table__col table__col--name table__col--head">
+                Название
+              </div>
+              <div class="table__col table__col--type table__col--head">
+                Тип
+              </div>
+              <div class="table__col table__col--desc table__col--head">
+                Описание
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onLoadCallback
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Вызывается при завершении инициализации виджета JivoSite
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onOpen
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Вызывается при открытии окна диалога JivoSite
+              </div>
+            </div>
+            <div class="table__row">
+            <div class="table__col table__col--name table__col--blue">
+              jivo_onClose
+            </div>
+            <div class="table__col table__col--type">
+              void
+            </div>
+            <div class="table__col table__col--desc">
+              Сворачивание окна диалога JivoSite
+            </div>
+          </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onIntroduction
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Посетитель ввёл контактные данные
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onResizeCallback
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Коллбек, срабатывающий при любом изменении размеров виджета
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="box__code"></div>
+      </div>
+      <div class="box" id="chat-mode">
+        <div class="box__text">
+          <h3 class="box__title box__title--h3">chatMode</h3>
+          <p class="box__paragraph">
+            С помощью этого метода можно получить текущее состояние операторов.
+          </p>
+        </div>
+        <div class="box__code"></div>
+      </div>
+      <div class="box" id="get-contact-info">
+        <div class="box__text">
+          <h3 class="box__title box__title--h3">getContactInfo</h3>
+          <p class="box__paragraph">
+            Считывает данные посетителя в виде
+            структуры contact_info, которые посетитель
+            ввел в форме представления. Если посетитель
+            не заполнил какие-либо поля, в их значении будет null.
+          </p>
+          <h4 class="box__title box__title--h4">
+            Callback-функции
+          </h4>
+          <div class="table">
+            <div class="table__row table__row--head">
+              <div class="table__col table__col--name table__col--head">
+                Название
+              </div>
+              <div class="table__col table__col--type table__col--head">
+                Тип
+              </div>
+              <div class="table__col table__col--desc table__col--head">
+                Описание
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onLoadCallback
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Вызывается при завершении инициализации виджета JivoSite
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onOpen
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Вызывается при открытии окна диалога JivoSite
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onClose
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Сворачивание окна диалога JivoSite
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onIntroduction
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Посетитель ввёл контактные данные
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onResizeCallback
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Коллбек, срабатывающий при любом изменении размеров виджета
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onResizeCallback
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Коллбек, срабатывающий при любом изменении размеров виджета
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onResizeCallback
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Коллбек, срабатывающий при любом изменении размеров виджета
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="box__code"></div>
+      </div>
+      <div class="box" id="get-visitor-number">
+        <div class="box__text">
+          <h3 class="box__title box__title--h3">getVisitorNumber</h3>
+          <p class="box__paragraph">
+            Считывает данные посетителя в виде
+            структуры contact_info, которые посетитель
+            ввел в форме представления. Если посетитель
+            не заполнил какие-либо поля, в их значении будет null.
+          </p>
+          <h4 class="box__title box__title--h4">
+            Callback-функции
+          </h4>
+          <div class="table">
+            <div class="table__row table__row--head">
+              <div class="table__col table__col--name table__col--head">
+                Название
+              </div>
+              <div class="table__col table__col--type table__col--head">
+                Тип
+              </div>
+              <div class="table__col table__col--desc table__col--head">
+                Описание
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onLoadCallback
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Вызывается при завершении инициализации виджета JivoSite
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onOpen
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Вызывается при открытии окна диалога JivoSite
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onClose
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Сворачивание окна диалога JivoSite
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onIntroduction
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Посетитель ввёл контактные данные
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onResizeCallback
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Коллбек, срабатывающий при любом изменении размеров виджета
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onResizeCallback
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Коллбек, срабатывающий при любом изменении размеров виджета
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onResizeCallback
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Коллбек, срабатывающий при любом изменении размеров виджета
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="box__code"></div>
+      </div>
+
+      <div class="box" id="webhooks">
+        <div class="box__text">
+          <h2 class="box__title box__title--h2">Webhooks</h2>
+        </div>
+        <div class="box__code"></div>
+      </div>
+      <div class="box" id="events">
+        <div class="box__text">
+          <h3 class="box__title box__title--h3">Events</h3>
+          <p class="box__paragraph">
+            JivoSite вызывает перечисленные ниже функции на странице,
+            чтобы сообщить о возникновении события. Вы можете объявить
+            на странице любую из этих функций и выполнять в ней логику
+            обработки возникшего события. Например, по событию
+            jivo_onIntroduction вы можете получить введенные
+            клиентом контактные данные.
+          </p>
+          <h4 class="box__title box__title--h4">
+            Callback-функции
+          </h4>
+          <div class="table">
+            <div class="table__row table__row--head">
+              <div class="table__col table__col--name table__col--head">
+                Название
+              </div>
+              <div class="table__col table__col--type table__col--head">
+                Тип
+              </div>
+              <div class="table__col table__col--desc table__col--head">
+                Описание
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onLoadCallback
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Вызывается при завершении инициализации виджета JivoSite
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onOpen
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Вызывается при открытии окна диалога JivoSite
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onClose
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Сворачивание окна диалога JivoSite
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onIntroduction
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Посетитель ввёл контактные данные
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onResizeCallback
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Коллбек, срабатывающий при любом изменении размеров виджета
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="box__code"></div>
+      </div>
+      <div class="box" id="chat-accepted">
+        <div class="box__text">
+          <h3 class="box__title box__title--h3">chatAccepted</h3>
+          <p class="box__paragraph">
+            С помощью этого метода можно получить текущее состояние операторов.
+          </p>
+        </div>
+        <div class="box__code"></div>
+      </div>
+      <div class="box" id="chat-finished">
+        <div class="box__text">
+          <h3 class="box__title box__title--h3">chatFinished</h3>
+          <p class="box__paragraph">
+            Считывает данные посетителя в виде
+            структуры contact_info, которые посетитель
+            ввел в форме представления. Если посетитель
+            не заполнил какие-либо поля, в их значении будет null.
+          </p>
+          <h4 class="box__title box__title--h4">
+            Callback-функции
+          </h4>
+          <div class="table">
+            <div class="table__row table__row--head">
+              <div class="table__col table__col--name table__col--head">
+                Название
+              </div>
+              <div class="table__col table__col--type table__col--head">
+                Тип
+              </div>
+              <div class="table__col table__col--desc table__col--head">
+                Описание
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onLoadCallback
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Вызывается при завершении инициализации виджета JivoSite
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onOpen
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Вызывается при открытии окна диалога JivoSite
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onClose
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Сворачивание окна диалога JivoSite
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onIntroduction
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Посетитель ввёл контактные данные
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onResizeCallback
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Коллбек, срабатывающий при любом изменении размеров виджета
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onResizeCallback
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Коллбек, срабатывающий при любом изменении размеров виджета
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onResizeCallback
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Коллбек, срабатывающий при любом изменении размеров виджета
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="box__code"></div>
+      </div>
+      <div class="box" id="offline-message">
+        <div class="box__text">
+          <h3 class="box__title box__title--h3">offlineMessage</h3>
+          <p class="box__paragraph">
+            Считывает данные посетителя в виде
+            структуры contact_info, которые посетитель
+            ввел в форме представления. Если посетитель
+            не заполнил какие-либо поля, в их значении будет null.
+          </p>
+          <h4 class="box__title box__title--h4">
+            Callback-функции
+          </h4>
+          <div class="table">
+            <div class="table__row table__row--head">
+              <div class="table__col table__col--name table__col--head">
+                Название
+              </div>
+              <div class="table__col table__col--type table__col--head">
+                Тип
+              </div>
+              <div class="table__col table__col--desc table__col--head">
+                Описание
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onLoadCallback
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Вызывается при завершении инициализации виджета JivoSite
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onOpen
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Вызывается при открытии окна диалога JivoSite
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onClose
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Сворачивание окна диалога JivoSite
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onIntroduction
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Посетитель ввёл контактные данные
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onResizeCallback
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Коллбек, срабатывающий при любом изменении размеров виджета
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onResizeCallback
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Коллбек, срабатывающий при любом изменении размеров виджета
+              </div>
+            </div>
+            <div class="table__row">
+              <div class="table__col table__col--name table__col--blue">
+                jivo_onResizeCallback
+              </div>
+              <div class="table__col table__col--type">
+                void
+              </div>
+              <div class="table__col table__col--desc">
+                Коллбек, срабатывающий при любом изменении размеров виджета
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="box__code"></div>
+      </div>
+    </main>
+  </div>
+  <div class="toast">copied</div>
+</body>
+</html>
