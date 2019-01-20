@@ -26,5 +26,6 @@ export default class Menu extends ScrollContent {
         e.preventDefault();
 
         this.scrollToId(e.currentTarget.getAttribute("href"));
+        document.getElementsByClassName('content__menu-wrap')[0].classList.remove("menu--visible");
     }
 }
